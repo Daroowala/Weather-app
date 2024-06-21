@@ -82,3 +82,24 @@ color: red
     justify-content: space-between;
     margin-top: 20px;
  }
+ .humidity, .wind{
+    display: flex;
+    align-items: center;
+ }
+ .humidity{
+    margin-left: 20px;
+ }
+ .wind{
+    margin-right: 20px;
+ }
+ .weather-details i{
+    font-size: 30px;
+ }
+ .weather-details .text{
+    margin-left: 10px;
+ }
+ .text span{
+    font-weight: 700;
+    font-size: 20px;
+ }
+ 
