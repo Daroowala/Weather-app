@@ -5,6 +5,9 @@ const temperature = document.querySelector(".temperature");
 const discription = document.querySelector(".discription");
 const humidity = document.getElementById("humidity");
 const wind_speed = document.getElementById("wind-speed");
+const feels_like = document.querySelector(".feels-like")
+const location_not_found = document.querySelector(".location-not-found")
+const weather_body = document.querySelector(".weather-body");
 
 async function checkWeather(city){
     const api_key = "18593d4828b0ea842043e21126c16d53";
@@ -13,14 +16,19 @@ async function checkWeather(city){
     const weather_data = await fetch(`${url}`).then(response => response.json());
 
     if (weather_data.cod === '404'){
+        location_not_found.style.display="flex";
+        weather_body.style.display = "none" 
         return;
     }
 
+    location_not_found.style.display="none";
+    weather_body.style.display = "flex" 
     console.log(weather_data)
     temperature.innerHTML = `${Math.round (weather_data.main.temp - 273.15)}C°`;
     discription.innerHTML = weather_data.weather[0].main;
     humidity.innerHTML = `${(weather_data.main.humidity)}%`;
     wind_speed.innerHTML = `${(weather_data.wind.speed)}Km/h`;
+    feels_like.innerHTML = `Feels like ${Math.round (weather_data.main.feels_like - 273.15)}° `;
 
     switch (weather_data.weather[0].main){
         case 'Clear':
@@ -51,5 +59,5 @@ async function checkWeather(city){
 }
 searchBtn.addEventListener('click',()=>{
     checkWeather(inputBox.value);
-   
+    console.log(weather_data)
 });
